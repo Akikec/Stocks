@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="StockController.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="target_Stock" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\ELEKTRASHARE\Shares\VendorStock\VendorFiles</Value>
+    </Setting>
+    <Setting Name="self_Stock" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\Gareev\Documents\Остатки\Обработка</Value>
+    </Setting>
+    <Setting Name="file_StocksList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\Gareev\Documents\Остатки\StockData.csv</Value>
+    </Setting>
+    <Setting Name="archive_Stock" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\ELEKTRASHARE\Shares\VendorStock\Archives</Value>
+    </Setting>
+    <Setting Name="lastWorkDate" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2017-05-26</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
