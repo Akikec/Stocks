@@ -36,6 +36,15 @@ namespace StockController
             //{
             //    CreateRow(i);
             //}
+            Timer _timer = new Timer();
+            _timer.Interval = 60000;
+            _timer.Tick += _timer_Tick;
+            _timer.Start();
+        }
+
+        private static void _timer_Tick(object sender, EventArgs e)
+        {
+            // старт чек.
         }
 
         private void btn_Test_Click(object sender, EventArgs e)

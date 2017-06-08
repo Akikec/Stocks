@@ -15,7 +15,7 @@
       <Value Profile="(Default)">\\ELEKTRASHARE\Shares\VendorStock\Archives</Value>
     </Setting>
     <Setting Name="lastWorkDate" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)">2017-05-26</Value>
+      <Value Profile="(Default)">2017-06-06</Value>
     </Setting>
   </Settings>
 </SettingsFile>

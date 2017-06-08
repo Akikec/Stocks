@@ -16,24 +16,24 @@ namespace StockController
         {
             if (Properties.Settings.Default.lastWorkDate != DateTime.Today)
             {
-                CatalogControl.Start();
-                Properties.Settings.Default.lastWorkDate = DateTime.Today;
-                Properties.Settings.Default.Save();
-            }
+                DialogResult result;
+                result = MessageBox.Show("Последнее использование программы: " +
+                    Properties.Settings.Default.lastWorkDate.ToString("dd MMMM") +
+                    "\r\n" + "Текущая дата: " + DateTime.Today.ToString("dd MMMM") +
+                    "\r\n" + "Выполнить архивацию?",
+                    "Архивация", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Cancel) return;
 
+                if (result == DialogResult.Yes)
+                {
+                    CatalogControl.Start();
+                    Properties.Settings.Default.lastWorkDate = DateTime.Today;
+                    Properties.Settings.Default.Save();
+                }
+            }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-
-            Timer _timer = new Timer();
-            _timer.Interval = 60000;
-            _timer.Tick += _timer_Tick;
-            _timer.Start();
-        }
-
-        private static void _timer_Tick(object sender, EventArgs e)
-        {
-            // старт чек.
         }
     }
 }

@@ -20,12 +20,14 @@ namespace StockController
         {
             DirectoryInfo dirInfo = new DirectoryInfo(Properties.Settings.Default.target_Stock);
             if (dirInfo == null) return;
-
-            ZipFile.CreateFromDirectory(Properties.Settings.Default.target_Stock, Properties.Settings.Default.archive_Stock+@"\"+ Properties.Settings.Default.lastWorkDate.ToString("ddMM")+".zip");
-                        
-            foreach (FileInfo file in dirInfo.GetFiles())
+            if (!File.Exists(Properties.Settings.Default.archive_Stock + @"\" + Properties.Settings.Default.lastWorkDate.ToString("ddMM") + ".zip"))
             {
-                file.Delete();
+                ZipFile.CreateFromDirectory(Properties.Settings.Default.target_Stock, Properties.Settings.Default.archive_Stock + @"\" + Properties.Settings.Default.lastWorkDate.ToString("ddMM") + ".zip");
+
+                foreach (FileInfo file in dirInfo.GetFiles())
+                {
+                    file.Delete();
+                }
             }
         }
 

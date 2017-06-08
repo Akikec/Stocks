@@ -73,7 +73,7 @@ namespace StockController.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2017-05-26")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2017-06-06")]
         public global::System.DateTime lastWorkDate {
             get {
                 return ((global::System.DateTime)(this["lastWorkDate"]));
