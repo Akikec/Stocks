@@ -26,6 +26,26 @@ namespace StockController
                 _stocksList = value;
             }
         }
+        /// <summary>
+        /// Проверка на наличие. 1 значение кол-во зеленых, 2 значение из них желтых, 3 значение всего.
+        /// </summary>
+        public int[] GetStatus()
+        {
+            int[] sum = new int[3];
+            for (int i = 0; i < _stocksList.Count; i++)
+            {
+                if (_stocksList[i].ThisTemplate.GetColor() == Color.LawnGreen)
+                {
+                    sum[0] += 1;
+                }
+                if (_stocksList[i].ThisTemplate.GetColor() == Color.Yellow)
+                {
+                    sum[1] += 1;
+                }
+            }
+            sum[2] = _stocksList.Count;
+            return sum;
+        }
         
         int _nameSize;
         int _x = 20;

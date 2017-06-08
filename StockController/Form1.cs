@@ -29,22 +29,28 @@ namespace StockController
             InitializeComponent();
 
             _cRow.Main(stockConteiner);
-
+            _cRow.AvailableCheak();
+            RefreshStock();
             //ReturnCSV(); //Обработка документа со списком остатков
 
             //for (int i = 0; i < _stocksList.Count; i++)
             //{
             //    CreateRow(i);
             //}
-            Timer _timer = new Timer();
-            _timer.Interval = 60000;
-            _timer.Tick += _timer_Tick;
-            _timer.Start();
+            updateTimer.Interval = 6000;
+            updateTimer.Tick += _timer_Tick;
+            updateTimer.Start();
         }
 
-        private static void _timer_Tick(object sender, EventArgs e)
+        private void _timer_Tick(object sender, EventArgs e)
         {
-            // старт чек.
+            RefreshStock();
+        }
+        private void RefreshStock()
+        {
+            //_cRow.AvailableCheak();
+            int[] sum = _cRow.GetStatus();
+            labelAllFor.Text = String.Format("Выполнено {0}({1}) из {2}", sum[0], sum[1], sum[2]);
         }
 
         private void btn_Test_Click(object sender, EventArgs e)
@@ -100,6 +106,11 @@ namespace StockController
             //    MessageBox.Show("Ошибка!");
             //}
             //Формирование Письма
+        }
+
+        private void labelAllFor_Click(object sender, EventArgs e)
+        {
+            labelAllFor.Text = DateTime.Today.Second.ToString();
         }
 
         //private void CheakTest()

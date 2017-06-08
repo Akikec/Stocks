@@ -91,7 +91,7 @@
             // updateTimer
             // 
             this.updateTimer.Enabled = true;
-            this.updateTimer.Interval = 30000;
+            this.updateTimer.Interval = 9999;
             // 
             // bt_Filter
             // 
@@ -118,11 +118,13 @@
             // labelAllFor
             // 
             this.labelAllFor.AutoSize = true;
-            this.labelAllFor.Location = new System.Drawing.Point(240, 8);
+            this.labelAllFor.Dock = System.Windows.Forms.DockStyle.Right;
+            this.labelAllFor.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelAllFor.Location = new System.Drawing.Point(367, 0);
             this.labelAllFor.Name = "labelAllFor";
-            this.labelAllFor.Size = new System.Drawing.Size(25, 13);
+            this.labelAllFor.Size = new System.Drawing.Size(0, 13);
             this.labelAllFor.TabIndex = 0;
-            this.labelAllFor.Text = "111";
+            this.labelAllFor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Form1
             // 
