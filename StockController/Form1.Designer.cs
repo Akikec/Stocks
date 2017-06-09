@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.stockConteiner = new System.Windows.Forms.Panel();
-            this.panelButton = new System.Windows.Forms.Panel();
             this.labelStockName = new System.Windows.Forms.Label();
-            this.btn_Refresh = new System.Windows.Forms.Button();
-            this.updateTimer = new System.Windows.Forms.Timer(this.components);
-            this.bt_Filter = new System.Windows.Forms.Button();
+            this.panelButton = new System.Windows.Forms.Panel();
             this.btn_MailSend = new System.Windows.Forms.Button();
             this.labelAllFor = new System.Windows.Forms.Label();
+            this.btn_Refresh = new System.Windows.Forms.Button();
+            this.bt_Filter = new System.Windows.Forms.Button();
+            this.updateTimer = new System.Windows.Forms.Timer(this.components);
             this.stockConteiner.SuspendLayout();
             this.panelButton.SuspendLayout();
             this.SuspendLayout();
@@ -55,6 +55,15 @@
             this.stockConteiner.Size = new System.Drawing.Size(369, 415);
             this.stockConteiner.TabIndex = 0;
             // 
+            // labelStockName
+            // 
+            this.labelStockName.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labelStockName.Location = new System.Drawing.Point(11, 0);
+            this.labelStockName.Name = "labelStockName";
+            this.labelStockName.Size = new System.Drawing.Size(124, 13);
+            this.labelStockName.TabIndex = 2;
+            this.labelStockName.Text = "Строки поставщиков:";
+            // 
             // panelButton
             // 
             this.panelButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -68,40 +77,6 @@
             this.panelButton.Name = "panelButton";
             this.panelButton.Size = new System.Drawing.Size(369, 63);
             this.panelButton.TabIndex = 1;
-            // 
-            // labelStockName
-            // 
-            this.labelStockName.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.labelStockName.Location = new System.Drawing.Point(11, 0);
-            this.labelStockName.Name = "labelStockName";
-            this.labelStockName.Size = new System.Drawing.Size(124, 13);
-            this.labelStockName.TabIndex = 2;
-            this.labelStockName.Text = "Строки поставщиков:";
-            // 
-            // btn_Refresh
-            // 
-            this.btn_Refresh.Location = new System.Drawing.Point(293, 33);
-            this.btn_Refresh.Name = "btn_Refresh";
-            this.btn_Refresh.Size = new System.Drawing.Size(75, 29);
-            this.btn_Refresh.TabIndex = 3;
-            this.btn_Refresh.Text = "Обновить";
-            this.btn_Refresh.UseVisualStyleBackColor = true;
-            this.btn_Refresh.Click += new System.EventHandler(this.btn_Test_Click);
-            // 
-            // updateTimer
-            // 
-            this.updateTimer.Enabled = true;
-            this.updateTimer.Interval = 9999;
-            // 
-            // bt_Filter
-            // 
-            this.bt_Filter.Location = new System.Drawing.Point(202, 33);
-            this.bt_Filter.Name = "bt_Filter";
-            this.bt_Filter.Size = new System.Drawing.Size(85, 29);
-            this.bt_Filter.TabIndex = 4;
-            this.bt_Filter.Text = "Фильтровать";
-            this.bt_Filter.UseVisualStyleBackColor = true;
-            this.bt_Filter.Click += new System.EventHandler(this.bt_Filter_Click);
             // 
             // btn_MailSend
             // 
@@ -125,6 +100,31 @@
             this.labelAllFor.Size = new System.Drawing.Size(0, 13);
             this.labelAllFor.TabIndex = 0;
             this.labelAllFor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btn_Refresh
+            // 
+            this.btn_Refresh.Location = new System.Drawing.Point(293, 33);
+            this.btn_Refresh.Name = "btn_Refresh";
+            this.btn_Refresh.Size = new System.Drawing.Size(75, 29);
+            this.btn_Refresh.TabIndex = 3;
+            this.btn_Refresh.Text = "Обновить";
+            this.btn_Refresh.UseVisualStyleBackColor = true;
+            this.btn_Refresh.Click += new System.EventHandler(this.btn_Test_Click);
+            // 
+            // bt_Filter
+            // 
+            this.bt_Filter.Location = new System.Drawing.Point(202, 33);
+            this.bt_Filter.Name = "bt_Filter";
+            this.bt_Filter.Size = new System.Drawing.Size(85, 29);
+            this.bt_Filter.TabIndex = 4;
+            this.bt_Filter.Text = "Фильтровать";
+            this.bt_Filter.UseVisualStyleBackColor = true;
+            this.bt_Filter.Click += new System.EventHandler(this.bt_Filter_Click);
+            // 
+            // updateTimer
+            // 
+            this.updateTimer.Enabled = true;
+            this.updateTimer.Interval = 9999;
             // 
             // Form1
             // 

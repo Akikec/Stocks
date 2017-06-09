@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Tests
 {
@@ -45,8 +46,7 @@ namespace Tests
             result.AddRange(binaryReader.ReadBytes((int)response.ContentLength));
             return result;
         }
-
-        static void Main(string[] args)
+        static void FirstTest()
         {
             CookieContainer cookies = new CookieContainer();
             /* Для некоторых сайтов, для авторизации нужно получить Cookie,
@@ -65,6 +65,10 @@ namespace Tests
             /* Указываем путь и расширение для записи. */
             File.WriteAllBytes(@"E:\file", test.ToArray());
             Console.ReadKey();
+        }
+        static void Main(string[] args)
+        {
+            //FirstTest();
         }
     }
 }
