@@ -44,6 +44,11 @@ namespace StockController
 
         private void _timer_Tick(object sender, EventArgs e)
         {
+            if(chBox_AutoRefresh.Checked == true)
+            {
+                _cRow.AvailableCheak();
+                _cRow.FilterStock();
+            }
             RefreshStock();
         }
         private void RefreshStock()
@@ -111,6 +116,19 @@ namespace StockController
         private void labelAllFor_Click(object sender, EventArgs e)
         {
             labelAllFor.Text = DateTime.Today.Second.ToString();
+        }
+
+        private void btn_Archive_Click(object sender, EventArgs e)
+        {
+            DialogResult result;
+            result = MessageBox.Show("Очистить каталоги и архивировать задним числом?",
+                                    "Архивация", MessageBoxButtons.YesNo);
+            if (result == DialogResult.No) return;
+
+            if (result == DialogResult.Yes)
+            {
+                CatalogControl.Start(DateTime.Today.AddDays(-1));
+            }
         }
 
         //private void CheakTest()

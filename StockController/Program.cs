@@ -26,10 +26,10 @@ namespace StockController
 
                 if (result == DialogResult.Yes)
                 {
-                    CatalogControl.Start();
-                    Properties.Settings.Default.lastWorkDate = DateTime.Today;
-                    Properties.Settings.Default.Save();
+                    CatalogControl.Start(Properties.Settings.Default.lastWorkDate);
                 }
+                Properties.Settings.Default.lastWorkDate = DateTime.Today;
+                Properties.Settings.Default.Save();
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

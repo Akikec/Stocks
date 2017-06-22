@@ -37,6 +37,8 @@
             this.btn_Refresh = new System.Windows.Forms.Button();
             this.bt_Filter = new System.Windows.Forms.Button();
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
+            this.btn_Archive = new System.Windows.Forms.Button();
+            this.chBox_AutoRefresh = new System.Windows.Forms.CheckBox();
             this.stockConteiner.SuspendLayout();
             this.panelButton.SuspendLayout();
             this.SuspendLayout();
@@ -68,21 +70,21 @@
             // 
             this.panelButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelButton.CausesValidation = false;
+            this.panelButton.Controls.Add(this.btn_Archive);
             this.panelButton.Controls.Add(this.btn_MailSend);
-            this.panelButton.Controls.Add(this.labelAllFor);
             this.panelButton.Controls.Add(this.btn_Refresh);
             this.panelButton.Controls.Add(this.bt_Filter);
             this.panelButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelButton.Location = new System.Drawing.Point(0, 0);
             this.panelButton.Name = "panelButton";
-            this.panelButton.Size = new System.Drawing.Size(369, 63);
+            this.panelButton.Size = new System.Drawing.Size(369, 49);
             this.panelButton.TabIndex = 1;
             // 
             // btn_MailSend
             // 
             this.btn_MailSend.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btn_MailSend.AutoSize = true;
-            this.btn_MailSend.Location = new System.Drawing.Point(121, 33);
+            this.btn_MailSend.Location = new System.Drawing.Point(208, 15);
             this.btn_MailSend.Name = "btn_MailSend";
             this.btn_MailSend.Size = new System.Drawing.Size(75, 29);
             this.btn_MailSend.TabIndex = 5;
@@ -92,10 +94,10 @@
             // 
             // labelAllFor
             // 
+            this.labelAllFor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelAllFor.AutoSize = true;
-            this.labelAllFor.Dock = System.Windows.Forms.DockStyle.Right;
             this.labelAllFor.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.labelAllFor.Location = new System.Drawing.Point(367, 0);
+            this.labelAllFor.Location = new System.Drawing.Point(241, 52);
             this.labelAllFor.Name = "labelAllFor";
             this.labelAllFor.Size = new System.Drawing.Size(0, 13);
             this.labelAllFor.TabIndex = 0;
@@ -103,7 +105,7 @@
             // 
             // btn_Refresh
             // 
-            this.btn_Refresh.Location = new System.Drawing.Point(293, 33);
+            this.btn_Refresh.Location = new System.Drawing.Point(11, 15);
             this.btn_Refresh.Name = "btn_Refresh";
             this.btn_Refresh.Size = new System.Drawing.Size(75, 29);
             this.btn_Refresh.TabIndex = 3;
@@ -113,7 +115,7 @@
             // 
             // bt_Filter
             // 
-            this.bt_Filter.Location = new System.Drawing.Point(202, 33);
+            this.bt_Filter.Location = new System.Drawing.Point(92, 15);
             this.bt_Filter.Name = "bt_Filter";
             this.bt_Filter.Size = new System.Drawing.Size(85, 29);
             this.bt_Filter.TabIndex = 4;
@@ -124,24 +126,49 @@
             // updateTimer
             // 
             this.updateTimer.Enabled = true;
-            this.updateTimer.Interval = 9999;
+            this.updateTimer.Interval = 30000;
+            // 
+            // btn_Archive
+            // 
+            this.btn_Archive.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btn_Archive.AutoSize = true;
+            this.btn_Archive.Location = new System.Drawing.Point(289, 16);
+            this.btn_Archive.Name = "btn_Archive";
+            this.btn_Archive.Size = new System.Drawing.Size(75, 29);
+            this.btn_Archive.TabIndex = 6;
+            this.btn_Archive.Text = "Архивация";
+            this.btn_Archive.UseVisualStyleBackColor = true;
+            this.btn_Archive.Click += new System.EventHandler(this.btn_Archive_Click);
+            // 
+            // chBox_AutoRefresh
+            // 
+            this.chBox_AutoRefresh.AutoSize = true;
+            this.chBox_AutoRefresh.Location = new System.Drawing.Point(12, 51);
+            this.chBox_AutoRefresh.Name = "chBox_AutoRefresh";
+            this.chBox_AutoRefresh.Size = new System.Drawing.Size(149, 17);
+            this.chBox_AutoRefresh.TabIndex = 7;
+            this.chBox_AutoRefresh.Text = "Обновлять автоматички";
+            this.chBox_AutoRefresh.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(369, 483);
+            this.Controls.Add(this.chBox_AutoRefresh);
             this.Controls.Add(this.panelButton);
+            this.Controls.Add(this.labelAllFor);
             this.Controls.Add(this.stockConteiner);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(385, 1000);
             this.MinimumSize = new System.Drawing.Size(385, 300);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Контроль остатков";
             this.stockConteiner.ResumeLayout(false);
             this.panelButton.ResumeLayout(false);
             this.panelButton.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -155,6 +182,8 @@
         private System.Windows.Forms.Button bt_Filter;
         private System.Windows.Forms.Button btn_MailSend;
         private System.Windows.Forms.Label labelAllFor;
+        private System.Windows.Forms.Button btn_Archive;
+        private System.Windows.Forms.CheckBox chBox_AutoRefresh;
     }
 }
 
