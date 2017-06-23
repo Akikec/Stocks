@@ -44,6 +44,9 @@ namespace StockController
             textBox1.Size = new System.Drawing.Size(100, 20);
             textBox1.TabIndex = 1;
             textBox1.Text = nameList[1];
+            textBox1.AllowDrop = true;
+            textBox1.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.Form_DragDrop);
+            textBox1.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.Form_DragEnter);
 
             // Статус
 

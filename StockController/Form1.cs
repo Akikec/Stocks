@@ -7,22 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace StockController
 {
     public partial class Form1 : Form
     {
-        //List<Stocks> _stocksList = new List<Stocks>();
-        //List<TemplateInterface> _interfaceList = new List<TemplateInterface>();
-        //int _x = 20;
-        //int _y = 20;
-
         CompleteRow _cRow = new CompleteRow();
-
-        //string label1Name = "Label1";
-        //string textBoxName = "textBox1";
-        //string label2Name = "Label2";
-        //int _nameSize;
+        bool _topMost = false;
 
         public Form1()
         {
@@ -31,12 +23,6 @@ namespace StockController
             _cRow.Main(stockConteiner);
             _cRow.AvailableCheak();
             RefreshStock();
-            //ReturnCSV(); //Обработка документа со списком остатков
-
-            //for (int i = 0; i < _stocksList.Count; i++)
-            //{
-            //    CreateRow(i);
-            //}
             updateTimer.Interval = 6000;
             updateTimer.Tick += _timer_Tick;
             updateTimer.Start();
@@ -60,7 +46,6 @@ namespace StockController
 
         private void btn_Test_Click(object sender, EventArgs e)
         {
-            //CheakTest();
             _cRow.AvailableCheak();
         }
 
@@ -72,45 +57,68 @@ namespace StockController
         private void button1_Click(object sender, EventArgs e)
         {
             OutlookMail.CreateMail("Нет остатков", "product@elecomt.ru", _cRow.AvailableSend());
+        }
 
-            //2
+        public static void Form_DragDrop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                OutlookDataObject dataObject = new OutlookDataObject(e.Data);
 
-            //string subjectEmail = "Meeting has been rescheduled.";
-            //string bodyEmail = "Meeting is one hour later.";
-            //Ma
-            //Outlook.MAPIFolder sentContacts = (Outlook.MAPIFolder)
-            //    this.Application.ActiveExplorer().Session.GetDefaultFolder
-            //    (Outlook.OlDefaultFolders.olFolderContacts);
 
-            //foreach (Outlook.ContactItem contact in sentContacts.Items)
-            //{
-            //    if (contact.Email1Address.Contains("example.com"))
-            //    {
-            //        this.CreateEmailItem(subjectEmail, contact
-            //            .Email1Address, bodyEmail);
-            //    }
-            //}
+                //string ss = sender.GetType().Name;
 
-            //1
+                TextBox _thistb = (TextBox)sender;
+                string stockname = _thistb.Text;
 
-            //SmtpClient Smtp = new SmtpClient("128.0.0.1"); //MailV-F.elecomt.ru
-            ////Smtp.Credentials = new NetworkCredential("name@yandex.ru", "pass");
-            //Smtp.Port = 587;
-            //MailMessage Message = new MailMessage();
-            //Message.From = new MailAddress("name@yandex.ru");
-            //Message.To.Add(new MailAddress("name@yandex.ru"));
-            //Message.Subject = "тема";
-            //Message.Body = "сообщение";
-            //try
-            //{
-            //    Message.
-            //    Smtp.Send(Message);
-            //}
-            //catch (SmtpException)
-            //{
-            //    MessageBox.Show("Ошибка!");
-            //}
-            //Формирование Письма
+                //get the names and data streams of the files dropped
+                string[] filenames = (string[])dataObject.GetData("FileGroupDescriptor");
+                MemoryStream[] filestreams = (MemoryStream[])dataObject.GetData("FileContents");
+
+                if (stockname.Split('.')[1] != filenames[0].Split('.').Last<string>())
+                {
+                    if (Form1.ActiveForm.TopMost != true)
+                    {
+                        Form1.ActiveForm.TopMost = true;
+                        MessageBox.Show("Некорректный формат, необходимо вручную пересохранить файл", "Ошибка переноса", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Form1.ActiveForm.TopMost = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Некорректный формат, необходимо вручную пересохранить файл", "Ошибка переноса", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    return;
+                }
+                for (int fileIndex = 0; fileIndex < filenames.Length; fileIndex++)
+                {
+                    //use the fileindex to get the name and data stream
+                    string filename = filenames[fileIndex];
+                    MemoryStream filestream = filestreams[fileIndex];
+
+                    //save the file stream using its name to the application path
+                    FileStream outputStream = File.Create(Properties.Settings.Default.self_Stock + @"\" + stockname);
+                    filestream.WriteTo(outputStream);
+                    outputStream.Close();
+                }
+            }
+            catch
+            {
+                if (Form1.ActiveForm.TopMost != true)
+                {
+                    Form1.ActiveForm.TopMost = true;
+                    MessageBox.Show("Необходимо перетащить файл из OutLook", "Ошибка переноса", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Form1.ActiveForm.TopMost = false;
+                }
+                else
+                {
+                    MessageBox.Show("Необходимо перетащить файл из OutLook", "Ошибка переноса", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        public static void Form_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
         }
 
         private void labelAllFor_Click(object sender, EventArgs e)
@@ -130,92 +138,5 @@ namespace StockController
                 CatalogControl.Start(DateTime.Today.AddDays(-1));
             }
         }
-
-        //private void CheakTest()
-        //{
-        //    for (int i = 0; i < _stocksList.Count; i++)
-        //    {
-        //        //
-        //        string self_Path = Properties.Settings.Default.self_Stock;
-        //        string target_Path = Properties.Settings.Default.target_Stock;
-
-        //        List<string> nameList = _stocksList[i].GetName();
-
-        //        if (File.Exists(self_Path + @"\" + nameList[1]))
-        //        {
-        //            _stocksList[i]._thisLabel.BackColor = Color.LawnGreen;
-        //        }
-        //        else
-        //        {
-        //            _stocksList[i]._thisLabel.BackColor = Color.Red;
-        //        }
-        //    }
-        //}
-
-        //void ReturnCSV()
-        //{
-        //    var fs = File.OpenRead(Properties.Settings.Default.file_StocksList);
-        //    var reader = new StreamReader(fs, Encoding.GetEncoding(1251));
-
-        //    reader.ReadLine();
-
-        //    while (!reader.EndOfStream)
-        //    {
-        //        var line = reader.ReadLine();
-        //        var values = line.Split(';');
-
-        //        _stocksList.Add(new Stocks(values));
-        //        if (_nameSize < values[0].Length) _nameSize = values[0].Length; // Поиск самого длинного названия
-        //    }
-        //    _nameSize *= 6;
-        //}
-
-        //void CreateRow(int i)
-        //{
-        //    List<string> nameList = _stocksList[i].GetName();
-
-        //    Label label1 = new System.Windows.Forms.Label();
-        //    TextBox textBox1 = new System.Windows.Forms.TextBox();
-        //    Label label2 = new System.Windows.Forms.Label();
-        //    //this.SuspendLayout();
-        //    _stocksList[i]._thisLabel = label1;
-        //    // 
-        //    // label1
-        //    // 
-        //    label1.AutoSize = true;
-        //    label1.BackColor = System.Drawing.SystemColors.Control;
-        //    label1.Location = new System.Drawing.Point(_x, _y);
-        //    label1.Name = label1Name;
-        //    label1.Size = new System.Drawing.Size(35, 13);
-        //    label1.TabIndex = 0;
-        //    label1.Text = nameList[0];
-        //    // 
-        //    // textBox1
-        //    // 
-        //    textBox1.Location = new System.Drawing.Point(_x +_nameSize+14, _y-3);
-        //    textBox1.Name = textBoxName;
-        //    textBox1.Size = new System.Drawing.Size(100, 20);
-        //    textBox1.TabIndex = 1;
-        //    textBox1.Text = nameList[1];
-        //    // 
-        //    // label2
-        //    // 
-        //    label2.AutoSize = true;
-        //    label2.Location = new System.Drawing.Point(_x+ _nameSize + 141, _y);
-        //    label2.Name = label2Name;
-        //    label2.Size = new System.Drawing.Size(35, 13);
-        //    label2.TabIndex = 2;
-        //    label2.Text = nameList[2];
-
-        //    stockConteiner.Controls.Add(label1);
-        //    stockConteiner.Controls.Add(textBox1);
-        //    stockConteiner.Controls.Add(label2);
-
-        //    _y += 25;
-        //    //label1Name = "Label1"+1;
-        //    //textBoxName = "textBox1"+1;
-        //    //label2Name = "Label2"+2;
-        //}
-
     }
 }
