@@ -82,5 +82,53 @@ namespace StockController.Properties {
                 this["lastWorkDate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool first_Launch {
+            get {
+                return ((bool)(this["first_Launch"]));
+            }
+            set {
+                this["first_Launch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 192, 0")]
+        public global::System.Drawing.Color color_Correct {
+            get {
+                return ((global::System.Drawing.Color)(this["color_Correct"]));
+            }
+            set {
+                this["color_Correct"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Yellow")]
+        public global::System.Drawing.Color color_Incorrect {
+            get {
+                return ((global::System.Drawing.Color)(this["color_Incorrect"]));
+            }
+            set {
+                this["color_Incorrect"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Red")]
+        public global::System.Drawing.Color color_Nothing {
+            get {
+                return ((global::System.Drawing.Color)(this["color_Nothing"]));
+            }
+            set {
+                this["color_Nothing"] = value;
+            }
+        }
     }
 }

@@ -14,22 +14,25 @@ namespace StockController
         [STAThread]
         static void Main()
         {
-            if (Properties.Settings.Default.lastWorkDate != DateTime.Today)
+            if (Properties.Settings.Default.first_Launch)
             {
-                DialogResult result;
-                result = MessageBox.Show("Последнее использование программы: " +
-                    Properties.Settings.Default.lastWorkDate.ToString("dd MMMM") +
-                    "\r\n" + "Текущая дата: " + DateTime.Today.ToString("dd MMMM") +
-                    "\r\n" + "Выполнить архивацию?",
-                    "Архивация", MessageBoxButtons.YesNoCancel);
-                if (result == DialogResult.Cancel) return;
-
-                if (result == DialogResult.Yes)
+                if (Properties.Settings.Default.lastWorkDate != DateTime.Today)
                 {
-                    CatalogControl.Start(Properties.Settings.Default.lastWorkDate);
+                    DialogResult result;
+                    result = MessageBox.Show("Последнее использование программы: " +
+                        Properties.Settings.Default.lastWorkDate.ToString("dd MMMM") +
+                        "\r\n" + "Текущая дата: " + DateTime.Today.ToString("dd MMMM") +
+                        "\r\n" + "Выполнить архивацию?",
+                        "Архивация", MessageBoxButtons.YesNoCancel);
+                    if (result == DialogResult.Cancel) return;
+
+                    if (result == DialogResult.Yes)
+                    {
+                        CatalogControl.Start(Properties.Settings.Default.lastWorkDate);
+                    }
+                    Properties.Settings.Default.lastWorkDate = DateTime.Today;
+                    Properties.Settings.Default.Save();
                 }
-                Properties.Settings.Default.lastWorkDate = DateTime.Today;
-                Properties.Settings.Default.Save();
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

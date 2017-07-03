@@ -45,8 +45,8 @@ namespace StockController
             textBox1.TabIndex = 1;
             textBox1.Text = nameList[1];
             textBox1.AllowDrop = true;
-            textBox1.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.Form_DragDrop);
-            textBox1.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.Form_DragEnter);
+            textBox1.DragDrop += new DragEventHandler(Form1.Form_DragDrop);
+            textBox1.DragEnter += new DragEventHandler(Form1.Form_DragEnter);
 
             // Статус
 
@@ -73,11 +73,11 @@ namespace StockController
         }
         public int SortColor()
         {
-            if (label1.BackColor == System.Drawing.Color.Red)
+            if (label1.BackColor == Properties.Settings.Default.color_Nothing)
             {
                 return -1;
             }
-            else if (label1.BackColor == System.Drawing.Color.LawnGreen)
+            else if (label1.BackColor == Properties.Settings.Default.color_Correct)
             {
                 return 1;
             }

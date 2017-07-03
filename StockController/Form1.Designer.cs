@@ -32,13 +32,15 @@
             this.stockConteiner = new System.Windows.Forms.Panel();
             this.labelStockName = new System.Windows.Forms.Label();
             this.panelButton = new System.Windows.Forms.Panel();
+            this.cb_TopMost = new System.Windows.Forms.CheckBox();
+            this.btn_Archive = new System.Windows.Forms.Button();
             this.btn_MailSend = new System.Windows.Forms.Button();
-            this.labelAllFor = new System.Windows.Forms.Label();
             this.btn_Refresh = new System.Windows.Forms.Button();
             this.bt_Filter = new System.Windows.Forms.Button();
+            this.labelAllFor = new System.Windows.Forms.Label();
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
-            this.btn_Archive = new System.Windows.Forms.Button();
             this.chBox_AutoRefresh = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.stockConteiner.SuspendLayout();
             this.panelButton.SuspendLayout();
             this.SuspendLayout();
@@ -70,6 +72,8 @@
             // 
             this.panelButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelButton.CausesValidation = false;
+            this.panelButton.Controls.Add(this.button1);
+            this.panelButton.Controls.Add(this.cb_TopMost);
             this.panelButton.Controls.Add(this.btn_Archive);
             this.panelButton.Controls.Add(this.btn_MailSend);
             this.panelButton.Controls.Add(this.btn_Refresh);
@@ -79,6 +83,28 @@
             this.panelButton.Name = "panelButton";
             this.panelButton.Size = new System.Drawing.Size(369, 49);
             this.panelButton.TabIndex = 1;
+            // 
+            // cb_TopMost
+            // 
+            this.cb_TopMost.AutoSize = true;
+            this.cb_TopMost.Location = new System.Drawing.Point(183, 23);
+            this.cb_TopMost.Name = "cb_TopMost";
+            this.cb_TopMost.Size = new System.Drawing.Size(15, 14);
+            this.cb_TopMost.TabIndex = 7;
+            this.cb_TopMost.UseVisualStyleBackColor = true;
+            this.cb_TopMost.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // btn_Archive
+            // 
+            this.btn_Archive.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btn_Archive.AutoSize = true;
+            this.btn_Archive.Location = new System.Drawing.Point(289, 16);
+            this.btn_Archive.Name = "btn_Archive";
+            this.btn_Archive.Size = new System.Drawing.Size(75, 29);
+            this.btn_Archive.TabIndex = 6;
+            this.btn_Archive.Text = "Архивация";
+            this.btn_Archive.UseVisualStyleBackColor = true;
+            this.btn_Archive.Click += new System.EventHandler(this.btn_Archive_Click);
             // 
             // btn_MailSend
             // 
@@ -91,17 +117,6 @@
             this.btn_MailSend.Text = "Письмо";
             this.btn_MailSend.UseVisualStyleBackColor = true;
             this.btn_MailSend.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // labelAllFor
-            // 
-            this.labelAllFor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelAllFor.AutoSize = true;
-            this.labelAllFor.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.labelAllFor.Location = new System.Drawing.Point(241, 52);
-            this.labelAllFor.Name = "labelAllFor";
-            this.labelAllFor.Size = new System.Drawing.Size(0, 13);
-            this.labelAllFor.TabIndex = 0;
-            this.labelAllFor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btn_Refresh
             // 
@@ -123,22 +138,21 @@
             this.bt_Filter.UseVisualStyleBackColor = true;
             this.bt_Filter.Click += new System.EventHandler(this.bt_Filter_Click);
             // 
+            // labelAllFor
+            // 
+            this.labelAllFor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelAllFor.AutoSize = true;
+            this.labelAllFor.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelAllFor.Location = new System.Drawing.Point(241, 52);
+            this.labelAllFor.Name = "labelAllFor";
+            this.labelAllFor.Size = new System.Drawing.Size(0, 13);
+            this.labelAllFor.TabIndex = 0;
+            this.labelAllFor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // updateTimer
             // 
-            this.updateTimer.Enabled = true;
+            this.updateTimer.Enabled = false;
             this.updateTimer.Interval = 30000;
-            // 
-            // btn_Archive
-            // 
-            this.btn_Archive.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btn_Archive.AutoSize = true;
-            this.btn_Archive.Location = new System.Drawing.Point(289, 16);
-            this.btn_Archive.Name = "btn_Archive";
-            this.btn_Archive.Size = new System.Drawing.Size(75, 29);
-            this.btn_Archive.TabIndex = 6;
-            this.btn_Archive.Text = "Архивация";
-            this.btn_Archive.UseVisualStyleBackColor = true;
-            this.btn_Archive.Click += new System.EventHandler(this.btn_Archive_Click);
             // 
             // chBox_AutoRefresh
             // 
@@ -149,6 +163,15 @@
             this.chBox_AutoRefresh.TabIndex = 7;
             this.chBox_AutoRefresh.Text = "Обновлять автоматички";
             this.chBox_AutoRefresh.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(11, -1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 10);
+            this.button1.TabIndex = 8;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Form1
             // 
@@ -184,6 +207,8 @@
         private System.Windows.Forms.Label labelAllFor;
         private System.Windows.Forms.Button btn_Archive;
         private System.Windows.Forms.CheckBox chBox_AutoRefresh;
+        private System.Windows.Forms.CheckBox cb_TopMost;
+        private System.Windows.Forms.Button button1;
     }
 }
 

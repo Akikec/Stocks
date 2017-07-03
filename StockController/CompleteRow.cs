@@ -34,11 +34,11 @@ namespace StockController
             int[] sum = new int[3];
             for (int i = 0; i < _stocksList.Count; i++)
             {
-                if (_stocksList[i].ThisTemplate.GetColor() == Color.LawnGreen)
+                if (_stocksList[i].ThisTemplate.GetColor() == Properties.Settings.Default.color_Correct)
                 {
                     sum[0] += 1;
                 }
-                if (_stocksList[i].ThisTemplate.GetColor() == Color.Yellow)
+                if (_stocksList[i].ThisTemplate.GetColor() == Properties.Settings.Default.color_Incorrect)
                 {
                     sum[1] += 1;
                 }
@@ -113,15 +113,15 @@ namespace StockController
 
                 if (_stocksList[i].CheakVendorFiles() && _stocksList[i].CheakStock())
                 {
-                    _stocksList[i].ThisTemplate.ChangeColor(Color.LawnGreen);
+                    _stocksList[i].ThisTemplate.ChangeColor(Properties.Settings.Default.color_Correct);
                 }
                 else if (_stocksList[i].CheakVendorFiles() || _stocksList[i].CheakStock())
                 {
-                    _stocksList[i].ThisTemplate.ChangeColor(Color.Yellow);
+                    _stocksList[i].ThisTemplate.ChangeColor(Properties.Settings.Default.color_Incorrect);
                 }
                 else
                 {
-                    _stocksList[i].ThisTemplate.ChangeColor(Color.Red);
+                    _stocksList[i].ThisTemplate.ChangeColor(Properties.Settings.Default.color_Nothing);
                     //_stocksList[i]._thisLabel.BackColor = Color.Red; По старому
                 }
             }
@@ -147,7 +147,7 @@ namespace StockController
 
             for (int i = 0; i < _stocksList.Count; i++)
             {
-                if(_stocksList[i].ThisTemplate.GetColor()== Color.Red)
+                if(_stocksList[i].ThisTemplate.GetColor()== Properties.Settings.Default.color_Nothing)
                 {
                     bodyBuilder.Append(_stocksList[i].GetName()[0]);
                     bodyBuilder.AppendLine();

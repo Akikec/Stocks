@@ -17,5 +17,17 @@
     <Setting Name="lastWorkDate" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)">2017-06-06</Value>
     </Setting>
+    <Setting Name="first_Launch" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="color_Correct" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">0, 192, 0</Value>
+    </Setting>
+    <Setting Name="color_Incorrect" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Yellow</Value>
+    </Setting>
+    <Setting Name="color_Nothing" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Red</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

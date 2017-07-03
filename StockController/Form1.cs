@@ -14,12 +14,25 @@ namespace StockController
     public partial class Form1 : Form
     {
         CompleteRow _cRow = new CompleteRow();
-        bool _topMost = false;
 
         public Form1()
         {
             InitializeComponent();
 
+            if (!Properties.Settings.Default.first_Launch)
+            {
+                //Первый вызов окна с настройками
+                OpenSettingsForm(Properties.Settings.Default.first_Launch);
+
+            }
+            else
+            {
+                StockMain();
+            }
+        }
+
+        private void StockMain()
+        {
             _cRow.Main(stockConteiner);
             _cRow.AvailableCheak();
             RefreshStock();
@@ -61,14 +74,12 @@ namespace StockController
 
         public static void Form_DragDrop(object sender, DragEventArgs e)
         {
+            TextBox _thistb = (TextBox)sender;
+            Form1 _thisForm = (Form1)_thistb.FindForm();
             try
             {
                 OutlookDataObject dataObject = new OutlookDataObject(e.Data);
-
-
                 //string ss = sender.GetType().Name;
-
-                TextBox _thistb = (TextBox)sender;
                 string stockname = _thistb.Text;
 
                 //get the names and data streams of the files dropped
@@ -77,11 +88,11 @@ namespace StockController
 
                 if (stockname.Split('.')[1] != filenames[0].Split('.').Last<string>())
                 {
-                    if (Form1.ActiveForm.TopMost != true)
+                    if (_thisForm.TopMost != true)
                     {
-                        Form1.ActiveForm.TopMost = true;
+                        _thisForm.TopMost = true;
                         MessageBox.Show("Некорректный формат, необходимо вручную пересохранить файл", "Ошибка переноса", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Form1.ActiveForm.TopMost = false;
+                        _thisForm.TopMost = false;
                     }
                     else
                     {
@@ -103,11 +114,11 @@ namespace StockController
             }
             catch
             {
-                if (Form1.ActiveForm.TopMost != true)
+                if (_thisForm.TopMost != true)
                 {
-                    Form1.ActiveForm.TopMost = true;
+                    _thisForm.TopMost = true;
                     MessageBox.Show("Необходимо перетащить файл из OutLook", "Ошибка переноса", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Form1.ActiveForm.TopMost = false;
+                    _thisForm.TopMost = false;
                 }
                 else
                 {
@@ -137,6 +148,36 @@ namespace StockController
             {
                 CatalogControl.Start(DateTime.Today.AddDays(-1));
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            this.TopMost = cb_TopMost.Checked;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            OpenSettingsForm(Properties.Settings.Default.first_Launch);
+        }
+
+        private void OpenSettingsForm(bool cancelcheak)
+        {
+            Form _settingsForm = new SettingsForm(cancelcheak);
+            _settingsForm.Show();
+            _settingsForm.TopMost = true;
+            _settingsForm.FormClosed += _settingsForm_FormClosed;
+            this.Enabled = false;
+        }
+
+        private void _settingsForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Enabled = true;
+            if (!Properties.Settings.Default.first_Launch)
+            {
+                Properties.Settings.Default.first_Launch = true;
+                StockMain();
+            }
+            _cRow.AvailableCheak();
         }
     }
 }
