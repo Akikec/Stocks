@@ -12,6 +12,7 @@ namespace StockController
     {
         Panel _ourPanel;
         List<Stocks> _stocksList = new List<Stocks>();
+        ToolTip _tooltip = new ToolTip();
         //List<TemplateInterface> _filterInterfaceList = new List<TemplateInterface>();
 
         internal List<Stocks> StocksList
@@ -56,6 +57,11 @@ namespace StockController
 
         public CompleteRow Main(Panel stockConteiner)
         {
+            _tooltip.AutoPopDelay = 2000;
+            _tooltip.InitialDelay = 100;
+            _tooltip.ReshowDelay = 500;
+            _tooltip.ShowAlways = true;
+
             _ourPanel = stockConteiner;
 
             ReturnStockListFromCSV();
@@ -63,11 +69,17 @@ namespace StockController
             for (int i = 0; i < _stocksList.Count; i++)
             {
                 _stocksList[i].ThisTemplate = ReturnInterface(_stocksList[i]);
+                AddToolTip(i);
                 //ReturnInterface(_stocksList[i]);
                 _y += _Y;
             }
 
             return this;
+        }
+
+        private void AddToolTip(int i)
+        {
+            _tooltip.SetToolTip(_stocksList[i].ThisTemplate.GetControl, _stocksList[i].GetTooltips);                
         }
 
         #endregion
@@ -129,15 +141,14 @@ namespace StockController
 
         public void FilterStock()
         {
-            int x = 20;
-            int y = 25;
+            Point currentFirstPoint = _stocksList[0].ThisTemplate.GetFirstPosition();
             _stocksList.Sort();
 
             for (int i = 0; i < _stocksList.Count; i++)
             {
-                _stocksList[i].ThisTemplate.ChangePosition(x, y, _nameSize);
+                _stocksList[i].ThisTemplate.ChangePosition(currentFirstPoint, _nameSize);
                 //ReturnInterface(_stocksList[i]);
-                y += _Y;
+                currentFirstPoint = Point.Add(currentFirstPoint, new Size(new Point(0, _Y)));
             }
         }
 

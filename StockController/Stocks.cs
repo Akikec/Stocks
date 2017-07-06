@@ -52,7 +52,27 @@ namespace StockController
             return _getname;
         }
 
-        
+        public string GetTooltips
+        {
+            get {
+                StringBuilder strBuilder = new StringBuilder();
+
+                strBuilder.Append("Название: " + _provider);
+                strBuilder.AppendLine();
+                strBuilder.Append("Имя файла: " + _fileName1 + " " + _fileName2 + " " + _fileName3);
+                strBuilder.AppendLine();
+                strBuilder.Append("Источник: " + _sender);
+                strBuilder.AppendLine();
+                strBuilder.Append("Ответственный: " + _responsible);
+                strBuilder.AppendLine();
+                //string tooltip;
+                //tooltip = "Название: " + _provider + "/n/r" +
+                //    "Имя файла: " + _fileName1 + " " + _fileName2 + " " + _fileName3 + "/n/r" +
+                //    "Источник: " + _sender + "/n/r" +
+                //    "Ответственный: " + _responsible;
+                return strBuilder.ToString();
+            }
+        }
 
         public bool CheakVendorFiles()
         {
@@ -93,6 +113,9 @@ namespace StockController
         {
             int a = _thisTemplate.SortColor();
             int b = other.ThisTemplate.SortColor();
+            char x = _fileName1[0];
+            char y = other._fileName1[0];
+
             if (a < b)
             {
                 return -1;
@@ -103,7 +126,18 @@ namespace StockController
             }
             else
             {
-                return 0;
+                if (x < y)
+                {
+                    return -1;
+                }
+                else if (x > y)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
             }
         }
     }

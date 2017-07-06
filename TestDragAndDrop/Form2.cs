@@ -13,7 +13,7 @@ namespace TestDragAndDrop
     public partial class Form2 : Form
     {
         List<Label> lb_list = new List<Label>();
-
+        List<Label> Cheak = new List<Label>();
         public Form2()
         {
             InitializeComponent();
@@ -43,11 +43,14 @@ namespace TestDragAndDrop
         private void button1_Click(object sender, EventArgs e)
         {
             int i = 0;
+            Point fPoint = lb_list[0].Location;
             foreach (Label lb in lb_list)
             {
-                lb.Location = new System.Drawing.Point(20, i * 20);
+                lb.Location = Point.Add(fPoint,new Size(new Point(0, i * 20)));//new System.Drawing.Point(20, i * 20);
                 i++;
+                Refresh();
             }
+            Point pn = panel1.AutoScrollPosition;
         }
     }
 }

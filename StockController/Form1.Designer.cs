@@ -32,6 +32,7 @@
             this.stockConteiner = new System.Windows.Forms.Panel();
             this.labelStockName = new System.Windows.Forms.Label();
             this.panelButton = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.cb_TopMost = new System.Windows.Forms.CheckBox();
             this.btn_Archive = new System.Windows.Forms.Button();
             this.btn_MailSend = new System.Windows.Forms.Button();
@@ -40,7 +41,7 @@
             this.labelAllFor = new System.Windows.Forms.Label();
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
             this.chBox_AutoRefresh = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.stockConteiner.SuspendLayout();
             this.panelButton.SuspendLayout();
             this.SuspendLayout();
@@ -84,6 +85,15 @@
             this.panelButton.Size = new System.Drawing.Size(369, 49);
             this.panelButton.TabIndex = 1;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(11, -1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 10);
+            this.button1.TabIndex = 8;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // cb_TopMost
             // 
             this.cb_TopMost.AutoSize = true;
@@ -91,7 +101,6 @@
             this.cb_TopMost.Name = "cb_TopMost";
             this.cb_TopMost.Size = new System.Drawing.Size(15, 14);
             this.cb_TopMost.TabIndex = 7;
-            this.cb_TopMost.UseVisualStyleBackColor = true;
             this.cb_TopMost.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // btn_Archive
@@ -151,7 +160,6 @@
             // 
             // updateTimer
             // 
-            this.updateTimer.Enabled = false;
             this.updateTimer.Interval = 30000;
             // 
             // chBox_AutoRefresh
@@ -163,15 +171,6 @@
             this.chBox_AutoRefresh.TabIndex = 7;
             this.chBox_AutoRefresh.Text = "Обновлять автоматички";
             this.chBox_AutoRefresh.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(11, -1);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 10);
-            this.button1.TabIndex = 8;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Form1
             // 
@@ -209,6 +208,7 @@
         private System.Windows.Forms.CheckBox chBox_AutoRefresh;
         private System.Windows.Forms.CheckBox cb_TopMost;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

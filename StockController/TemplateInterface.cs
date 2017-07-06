@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace StockController
 {
-    class TemplateInterface
+    class TemplateInterface : Control
     {
         Label label1 = new Label();
         TextBox textBox1 = new TextBox();
@@ -17,6 +17,11 @@ namespace StockController
         string label1Name = "Labels";
         string textBoxName = "textBoxs";
         string label2Name = "Labels";
+
+        public Control GetControl
+        {
+            get{ return label1.Controls.Owner; }
+        }
 
         readonly int[] width = { 14, 141 }; //Расстояние между элементами интерфейса
 
@@ -92,11 +97,16 @@ namespace StockController
             label2.Text = status;
         }
 
-        public void ChangePosition(int x, int y, int nameSize)
+        public Point GetFirstPosition()
         {
-            label1.Location = new System.Drawing.Point(x, y);
-            textBox1.Location = new System.Drawing.Point(x + nameSize + width[0], y - 3);
-            label2.Location = new System.Drawing.Point(x + nameSize + width[1], y);
+            return label1.Location;
+        }
+
+        public void ChangePosition(Point pnt, int nameSize)
+        {
+            label1.Location = new System.Drawing.Point(pnt.X, pnt.Y);
+            textBox1.Location = new System.Drawing.Point(pnt.X + nameSize + width[0], pnt.Y - 3);
+            label2.Location = new System.Drawing.Point(pnt.X + nameSize + width[1], pnt.Y);
         }
     }
 }
