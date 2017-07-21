@@ -32,16 +32,18 @@
             this.stockConteiner = new System.Windows.Forms.Panel();
             this.labelStockName = new System.Windows.Forms.Label();
             this.panelButton = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_Throw = new System.Windows.Forms.Button();
+            this.btn_Settings = new System.Windows.Forms.Button();
             this.cb_TopMost = new System.Windows.Forms.CheckBox();
             this.btn_Archive = new System.Windows.Forms.Button();
             this.btn_MailSend = new System.Windows.Forms.Button();
             this.btn_Refresh = new System.Windows.Forms.Button();
-            this.bt_Filter = new System.Windows.Forms.Button();
+            this.btn_Filter = new System.Windows.Forms.Button();
             this.labelAllFor = new System.Windows.Forms.Label();
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
             this.chBox_AutoRefresh = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.stockConteiner.SuspendLayout();
             this.panelButton.SuspendLayout();
             this.SuspendLayout();
@@ -57,7 +59,7 @@
             this.stockConteiner.Controls.Add(this.labelStockName);
             this.stockConteiner.Location = new System.Drawing.Point(0, 69);
             this.stockConteiner.Name = "stockConteiner";
-            this.stockConteiner.Size = new System.Drawing.Size(369, 415);
+            this.stockConteiner.Size = new System.Drawing.Size(369, 693);
             this.stockConteiner.TabIndex = 0;
             // 
             // labelStockName
@@ -73,45 +75,60 @@
             // 
             this.panelButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelButton.CausesValidation = false;
-            this.panelButton.Controls.Add(this.button1);
+            this.panelButton.Controls.Add(this.btn_Throw);
+            this.panelButton.Controls.Add(this.btn_Settings);
             this.panelButton.Controls.Add(this.cb_TopMost);
             this.panelButton.Controls.Add(this.btn_Archive);
             this.panelButton.Controls.Add(this.btn_MailSend);
             this.panelButton.Controls.Add(this.btn_Refresh);
-            this.panelButton.Controls.Add(this.bt_Filter);
             this.panelButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelButton.Location = new System.Drawing.Point(0, 0);
             this.panelButton.Name = "panelButton";
             this.panelButton.Size = new System.Drawing.Size(369, 49);
             this.panelButton.TabIndex = 1;
             // 
-            // button1
+            // btn_Throw
             // 
-            this.button1.Location = new System.Drawing.Point(11, -1);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 10);
-            this.button1.TabIndex = 8;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.btn_Throw.Location = new System.Drawing.Point(204, 15);
+            this.btn_Throw.Name = "btn_Throw";
+            this.btn_Throw.Size = new System.Drawing.Size(75, 29);
+            this.btn_Throw.TabIndex = 9;
+            this.btn_Throw.Text = "Перекинуть";
+            this.toolTip1.SetToolTip(this.btn_Throw, "Скинуть все файлы из Папки на вашем компьютере, в папку на сервере.");
+            this.btn_Throw.UseVisualStyleBackColor = true;
+            this.btn_Throw.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // btn_Settings
+            // 
+            this.btn_Settings.Location = new System.Drawing.Point(-1, -1);
+            this.btn_Settings.Name = "btn_Settings";
+            this.btn_Settings.Size = new System.Drawing.Size(75, 29);
+            this.btn_Settings.TabIndex = 8;
+            this.btn_Settings.Text = "Настройки";
+            this.btn_Settings.UseVisualStyleBackColor = true;
+            this.btn_Settings.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // cb_TopMost
             // 
             this.cb_TopMost.AutoSize = true;
-            this.cb_TopMost.Location = new System.Drawing.Point(183, 23);
+            this.cb_TopMost.Checked = true;
+            this.cb_TopMost.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_TopMost.Location = new System.Drawing.Point(11, 29);
             this.cb_TopMost.Name = "cb_TopMost";
-            this.cb_TopMost.Size = new System.Drawing.Size(15, 14);
+            this.cb_TopMost.Size = new System.Drawing.Size(58, 17);
             this.cb_TopMost.TabIndex = 7;
+            this.cb_TopMost.Text = "Якорь";
             this.cb_TopMost.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // btn_Archive
             // 
             this.btn_Archive.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btn_Archive.AutoSize = true;
-            this.btn_Archive.Location = new System.Drawing.Point(289, 16);
+            this.btn_Archive.Location = new System.Drawing.Point(277, 15);
             this.btn_Archive.Name = "btn_Archive";
-            this.btn_Archive.Size = new System.Drawing.Size(75, 29);
+            this.btn_Archive.Size = new System.Drawing.Size(69, 29);
             this.btn_Archive.TabIndex = 6;
             this.btn_Archive.Text = "Архивация";
+            this.toolTip1.SetToolTip(this.btn_Archive, "Заархивировать задним числом, и очистить папку с остатками на вашем компьютере.");
             this.btn_Archive.UseVisualStyleBackColor = true;
             this.btn_Archive.Click += new System.EventHandler(this.btn_Archive_Click);
             // 
@@ -119,33 +136,36 @@
             // 
             this.btn_MailSend.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btn_MailSend.AutoSize = true;
-            this.btn_MailSend.Location = new System.Drawing.Point(208, 15);
+            this.btn_MailSend.Location = new System.Drawing.Point(151, 15);
             this.btn_MailSend.Name = "btn_MailSend";
-            this.btn_MailSend.Size = new System.Drawing.Size(75, 29);
+            this.btn_MailSend.Size = new System.Drawing.Size(57, 29);
             this.btn_MailSend.TabIndex = 5;
             this.btn_MailSend.Text = "Письмо";
+            this.toolTip1.SetToolTip(this.btn_MailSend, "Сформировать письмо, об отсутствующих остатках.");
             this.btn_MailSend.UseVisualStyleBackColor = true;
             this.btn_MailSend.Click += new System.EventHandler(this.button1_Click);
             // 
             // btn_Refresh
             // 
-            this.btn_Refresh.Location = new System.Drawing.Point(11, 15);
+            this.btn_Refresh.Location = new System.Drawing.Point(80, 15);
             this.btn_Refresh.Name = "btn_Refresh";
             this.btn_Refresh.Size = new System.Drawing.Size(75, 29);
             this.btn_Refresh.TabIndex = 3;
             this.btn_Refresh.Text = "Обновить";
+            this.toolTip1.SetToolTip(this.btn_Refresh, "Обновление остатков");
             this.btn_Refresh.UseVisualStyleBackColor = true;
             this.btn_Refresh.Click += new System.EventHandler(this.btn_Test_Click);
             // 
-            // bt_Filter
+            // btn_Filter
             // 
-            this.bt_Filter.Location = new System.Drawing.Point(92, 15);
-            this.bt_Filter.Name = "bt_Filter";
-            this.bt_Filter.Size = new System.Drawing.Size(85, 29);
-            this.bt_Filter.TabIndex = 4;
-            this.bt_Filter.Text = "Фильтровать";
-            this.bt_Filter.UseVisualStyleBackColor = true;
-            this.bt_Filter.Click += new System.EventHandler(this.bt_Filter_Click);
+            this.btn_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Filter.Location = new System.Drawing.Point(12, 48);
+            this.btn_Filter.Name = "btn_Filter";
+            this.btn_Filter.Size = new System.Drawing.Size(97, 22);
+            this.btn_Filter.TabIndex = 4;
+            this.btn_Filter.Text = "↓ Фильтровать";
+            this.btn_Filter.UseVisualStyleBackColor = false;
+            this.btn_Filter.Click += new System.EventHandler(this.bt_Filter_Click);
             // 
             // labelAllFor
             // 
@@ -165,22 +185,27 @@
             // chBox_AutoRefresh
             // 
             this.chBox_AutoRefresh.AutoSize = true;
-            this.chBox_AutoRefresh.Location = new System.Drawing.Point(12, 51);
+            this.chBox_AutoRefresh.Location = new System.Drawing.Point(115, 51);
             this.chBox_AutoRefresh.Name = "chBox_AutoRefresh";
-            this.chBox_AutoRefresh.Size = new System.Drawing.Size(149, 17);
+            this.chBox_AutoRefresh.Size = new System.Drawing.Size(110, 17);
             this.chBox_AutoRefresh.TabIndex = 7;
-            this.chBox_AutoRefresh.Text = "Обновлять автоматички";
+            this.chBox_AutoRefresh.Text = "Автообновление";
             this.chBox_AutoRefresh.UseVisualStyleBackColor = true;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 483);
+            this.ClientSize = new System.Drawing.Size(369, 761);
             this.Controls.Add(this.chBox_AutoRefresh);
             this.Controls.Add(this.panelButton);
             this.Controls.Add(this.labelAllFor);
             this.Controls.Add(this.stockConteiner);
+            this.Controls.Add(this.btn_Filter);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(385, 1000);
             this.MinimumSize = new System.Drawing.Size(385, 300);
@@ -201,14 +226,16 @@
         private System.Windows.Forms.Label labelStockName;
         private System.Windows.Forms.Button btn_Refresh;
         private System.Windows.Forms.Timer updateTimer;
-        private System.Windows.Forms.Button bt_Filter;
+        private System.Windows.Forms.Button btn_Filter;
         private System.Windows.Forms.Button btn_MailSend;
         private System.Windows.Forms.Label labelAllFor;
         private System.Windows.Forms.Button btn_Archive;
         private System.Windows.Forms.CheckBox chBox_AutoRefresh;
         private System.Windows.Forms.CheckBox cb_TopMost;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_Settings;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btn_Throw;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

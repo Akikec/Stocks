@@ -28,15 +28,19 @@ namespace StockController
             //{
             try { 
                 ZipFile.CreateFromDirectory(Properties.Settings.Default.target_Stock, Properties.Settings.Default.archive_Stock + @"\" + _followDate.ToString("ddMM") + ".zip");
-
+            }
+            catch
+            {
+                ZipFile.CreateFromDirectory(Properties.Settings.Default.target_Stock, Properties.Settings.Default.archive_Stock + @"\" + _followDate.ToString("ddMM") + "Also.zip");
+                MessageBox.Show("Архив под названием " + _followDate.ToString("ddMM") + ".zip уже существует, создан " 
+                                + _followDate.ToString("ddMM") + "Also.zip", "Ошибка архивации", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
                 foreach (FileInfo file in dirInfo.GetFiles())
                 {
                     file.Delete();
                 }
-            }
-            catch
-            {
-                MessageBox.Show("Архив под названием "+ _followDate.ToString("ddMM") + ".zip уже существует", "Ошибка архивации", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             //}
         }

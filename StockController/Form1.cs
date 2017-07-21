@@ -18,6 +18,7 @@ namespace StockController
         public Form1()
         {
             InitializeComponent();
+            InitializeBackgroundWorker();
 
             if (!Properties.Settings.Default.first_Launch)
             {
@@ -31,12 +32,24 @@ namespace StockController
             }
         }
 
+        private void InitializeBackgroundWorker()
+        {
+            backgroundWorker1.DoWork +=
+                new DoWorkEventHandler(backgroundWorker1_DoWork);
+            backgroundWorker1.RunWorkerCompleted +=
+                new RunWorkerCompletedEventHandler(
+            backgroundWorker1_RunWorkerCompleted);
+            backgroundWorker1.ProgressChanged +=
+                new ProgressChangedEventHandler(
+            backgroundWorker1_ProgressChanged);
+        }
+
         private void StockMain()
         {
             _cRow.Main(stockConteiner);
             _cRow.AvailableCheak();
             RefreshStock();
-            updateTimer.Interval = 6000;
+            updateTimer.Interval = 30000;
             updateTimer.Tick += _timer_Tick;
             updateTimer.Start();
         }
@@ -64,14 +77,17 @@ namespace StockController
 
         private void bt_Filter_Click(object sender, EventArgs e)
         {
+            _cRow.AvailableCheak();
             _cRow.FilterStock();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            _cRow.AvailableCheak();
             OutlookMail.CreateMail("Нет остатков", "product@elecomt.ru", _cRow.AvailableSend());
         }
 
+        #region D&D
         public static void Form_DragDrop(object sender, DragEventArgs e)
         {
             TextBox _thistb = (TextBox)sender;
@@ -131,6 +147,7 @@ namespace StockController
         {
             e.Effect = DragDropEffects.Copy;
         }
+        #endregion
 
         private void labelAllFor_Click(object sender, EventArgs e)
         {
@@ -154,7 +171,7 @@ namespace StockController
         {
             this.TopMost = cb_TopMost.Checked;
         }
-
+        
         private void button1_Click_1(object sender, EventArgs e)
         {
             OpenSettingsForm(Properties.Settings.Default.first_Launch);
@@ -179,5 +196,47 @@ namespace StockController
             }
             _cRow.AvailableCheak();
         }
+        #region Async
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //SendStockToTarget();
+            btn_Throw.Enabled = false;
+            backgroundWorker1.RunWorkerAsync();
+
+        }
+        
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            e.Result = SendStockToTarget(worker, e);
+        }
+        
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show(e.Error.Message);
+            }
+            btn_Throw.Enabled = true;
+        }
+        
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //
+        }
+
+        bool SendStockToTarget(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            //string[] allFile = Directory.GetFileSystemEntries(Properties.Settings.Default.self_Stock);
+            DirectoryInfo dir = new DirectoryInfo(Properties.Settings.Default.self_Stock);
+            FileInfo[] fileInf = dir.GetFiles();
+            for (int n = 0; n < fileInf.Length; n++)
+            {
+                if (!File.Exists(Properties.Settings.Default.target_Stock + "\\" + fileInf[n].Name))
+                    fileInf[n].CopyTo(Properties.Settings.Default.target_Stock + "\\" + fileInf[n].Name, true);
+            }
+            return true;
+        }
+        #endregion
     }
 }
