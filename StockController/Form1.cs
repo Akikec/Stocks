@@ -141,6 +141,7 @@ namespace StockController
                     MessageBox.Show("Необходимо перетащить файл из OutLook", "Ошибка переноса", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            _thisForm._cRow.AvailableCheak();
         }
 
         public static void Form_DragEnter(object sender, DragEventArgs e)

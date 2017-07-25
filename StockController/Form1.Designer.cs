@@ -89,7 +89,7 @@
             // 
             // btn_Throw
             // 
-            this.btn_Throw.Location = new System.Drawing.Point(204, 15);
+            this.btn_Throw.Location = new System.Drawing.Point(215, 10);
             this.btn_Throw.Name = "btn_Throw";
             this.btn_Throw.Size = new System.Drawing.Size(75, 29);
             this.btn_Throw.TabIndex = 9;
@@ -123,9 +123,9 @@
             // btn_Archive
             // 
             this.btn_Archive.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btn_Archive.Location = new System.Drawing.Point(277, 15);
+            this.btn_Archive.Location = new System.Drawing.Point(290, 10);
             this.btn_Archive.Name = "btn_Archive";
-            this.btn_Archive.Size = new System.Drawing.Size(69, 29);
+            this.btn_Archive.Size = new System.Drawing.Size(70, 29);
             this.btn_Archive.TabIndex = 6;
             this.btn_Archive.Text = "Архивация";
             this.toolTip1.SetToolTip(this.btn_Archive, "Заархивировать задним числом, и очистить папку с остатками на вашем компьютере.");
@@ -136,9 +136,9 @@
             // 
             this.btn_MailSend.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btn_MailSend.AutoSize = true;
-            this.btn_MailSend.Location = new System.Drawing.Point(151, 15);
+            this.btn_MailSend.Location = new System.Drawing.Point(145, 10);
             this.btn_MailSend.Name = "btn_MailSend";
-            this.btn_MailSend.Size = new System.Drawing.Size(57, 29);
+            this.btn_MailSend.Size = new System.Drawing.Size(65, 29);
             this.btn_MailSend.TabIndex = 5;
             this.btn_MailSend.Text = "Письмо";
             this.toolTip1.SetToolTip(this.btn_MailSend, "Сформировать письмо, об отсутствующих остатках.");
@@ -147,9 +147,9 @@
             // 
             // btn_Refresh
             // 
-            this.btn_Refresh.Location = new System.Drawing.Point(80, 15);
+            this.btn_Refresh.Location = new System.Drawing.Point(80, 10);
             this.btn_Refresh.Name = "btn_Refresh";
-            this.btn_Refresh.Size = new System.Drawing.Size(75, 29);
+            this.btn_Refresh.Size = new System.Drawing.Size(65, 29);
             this.btn_Refresh.TabIndex = 3;
             this.btn_Refresh.Text = "Обновить";
             this.toolTip1.SetToolTip(this.btn_Refresh, "Обновление остатков");
@@ -211,6 +211,7 @@
             this.MinimumSize = new System.Drawing.Size(385, 300);
             this.Name = "Form1";
             this.Text = "Контроль остатков";
+            this.TopMost = true;
             this.stockConteiner.ResumeLayout(false);
             this.panelButton.ResumeLayout(false);
             this.panelButton.PerformLayout();
