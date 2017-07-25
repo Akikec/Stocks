@@ -3,13 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DepartureOfBalances", "DepartureOfBalances\DepartureOfBalances.csproj", "{C8297193-7D9B-4363-B726-661C8B7318A3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{224C5D93-9BD9-4E29-9983-88F7EFEF653F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockController", "StockController\StockController.csproj", "{B4890B38-655D-47FC-9CB2-8772707787B6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDragAndDrop", "TestDragAndDrop\TestDragAndDrop.csproj", "{E73528D8-D9A8-4635-AA20-6F4830E83A11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,22 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C8297193-7D9B-4363-B726-661C8B7318A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8297193-7D9B-4363-B726-661C8B7318A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8297193-7D9B-4363-B726-661C8B7318A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C8297193-7D9B-4363-B726-661C8B7318A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{224C5D93-9BD9-4E29-9983-88F7EFEF653F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{224C5D93-9BD9-4E29-9983-88F7EFEF653F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{224C5D93-9BD9-4E29-9983-88F7EFEF653F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{224C5D93-9BD9-4E29-9983-88F7EFEF653F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B4890B38-655D-47FC-9CB2-8772707787B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B4890B38-655D-47FC-9CB2-8772707787B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4890B38-655D-47FC-9CB2-8772707787B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4890B38-655D-47FC-9CB2-8772707787B6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E73528D8-D9A8-4635-AA20-6F4830E83A11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E73528D8-D9A8-4635-AA20-6F4830E83A11}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E73528D8-D9A8-4635-AA20-6F4830E83A11}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E73528D8-D9A8-4635-AA20-6F4830E83A11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
