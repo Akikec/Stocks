@@ -55,5 +55,35 @@ namespace StockController
                 file.Delete();
             }
         }
+
+        public static bool Get_Old(string name)
+        {
+            int whatDays = -1;
+            if (!File.Exists(Properties.Settings.Default.archive_Stock + @"\" + DateTime.Today.AddDays(whatDays).ToString("ddMM") + ".zip"))
+            {
+                whatDays = -3;
+            }
+            if (!File.Exists(Properties.Settings.Default.archive_Stock + @"\" + DateTime.Today.AddDays(whatDays).ToString("ddMM") + ".zip"))
+            {
+                return false;
+            }
+                using (var zipFile = ZipFile.OpenRead(Properties.Settings.Default.archive_Stock + @"\" + DateTime.Today.AddDays(whatDays).ToString("ddMM") + ".zip"))
+            {
+
+                foreach (ZipArchiveEntry entry in zipFile.Entries)
+                {
+                    if (string.Equals(
+                                Path.GetFileName(entry.Name), name,
+                                StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        var path = Properties.Settings.Default.target_Stock + @"\" + entry.Name;
+                        entry.ExtractToFile(path);
+                        return true;
+                    }
+                }
+            }
+            return true;
+        }
+
     }
 }

@@ -95,7 +95,6 @@ namespace StockController
             try
             {
                 OutlookDataObject dataObject = new OutlookDataObject(e.Data);
-                //string ss = sender.GetType().Name;
                 string stockname = _thistb.Text;
 
                 //get the names and data streams of the files dropped
@@ -114,6 +113,7 @@ namespace StockController
                     {
                         MessageBox.Show("Некорректный формат, необходимо вручную пересохранить файл", "Ошибка переноса", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                    _thistb.BackColor = Color.White;
                     return;
                 }
                 for (int fileIndex = 0; fileIndex < filenames.Length; fileIndex++)
@@ -140,13 +140,23 @@ namespace StockController
                 {
                     MessageBox.Show("Необходимо перетащить файл из OutLook", "Ошибка переноса", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                _thistb.BackColor = Color.White;
             }
             _thisForm._cRow.AvailableCheak();
+            _thistb.BackColor = Color.White;
         }
 
         public static void Form_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Copy;
+            TextBox _thistb = (TextBox)sender;
+            _thistb.BackColor = Color.Red;
+        }
+
+        public static void Form_DragLeave(object sender, EventArgs e)
+        {
+            TextBox _thistb = (TextBox)sender;
+            _thistb.BackColor = Color.White;
         }
         #endregion
 
@@ -165,6 +175,16 @@ namespace StockController
             if (result == DialogResult.Yes)
             {
                 CatalogControl.Start(DateTime.Today.AddDays(-1));
+            }
+        }
+
+        public static void btn_Send_Old(object sender, EventArgs e)
+        {
+            Button _thisbtn = (Button)sender;
+            //_thisbtn.Name
+            if (!CatalogControl.Get_Old(_thisbtn.Name))
+            {
+                MessageBox.Show("Архиву больше 3 дней, действие не выполнимо.", "Сохранение строго файла");
             }
         }
 

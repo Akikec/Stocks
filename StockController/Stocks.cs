@@ -17,7 +17,6 @@ namespace StockController
         private string _sender;
         private string _responsible;
         private TemplateInterface _thisTemplate;
-        public Label _thisLabel; //Убрать
 
         public TemplateInterface ThisTemplate
         {

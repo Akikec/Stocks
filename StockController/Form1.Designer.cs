@@ -158,7 +158,7 @@
             // 
             // btn_Filter
             // 
-            this.btn_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Filter.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btn_Filter.Location = new System.Drawing.Point(12, 48);
             this.btn_Filter.Name = "btn_Filter";
             this.btn_Filter.Size = new System.Drawing.Size(97, 22);

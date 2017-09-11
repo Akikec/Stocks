@@ -87,21 +87,23 @@ namespace StockController
         #region Lists Builder
         private void ReturnStockListFromCSV()
         {
-            var fs = File.OpenRead(Properties.Settings.Default.file_StocksList);
-            var reader = new StreamReader(fs, Encoding.GetEncoding(1251));
-
-            reader.ReadLine(); // Пропуск заголовков
-
-            while (!reader.EndOfStream)
+            if (!File.Exists(Properties.Settings.Default.file_StocksList)) return;
+            using (FileStream fs = File.OpenRead(Properties.Settings.Default.file_StocksList))
+            using (StreamReader reader = new StreamReader(fs, Encoding.GetEncoding(1251)))
             {
-                var line = reader.ReadLine();
-                var values = line.Split(';');
+                reader.ReadLine(); // Пропуск заголовков
 
-                _stocksList.Add(new Stocks(values));
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
 
-                if (_nameSize < values[0].Length) _nameSize = values[0].Length; // Поиск самого длинного названия
+                    _stocksList.Add(new Stocks(values));
+
+                    if (_nameSize < values[0].Length) _nameSize = values[0].Length; // Поиск самого длинного названия
+                }
+                _nameSize *= 5;
             }
-            _nameSize *= 5;
         }
 
         private TemplateInterface ReturnInterface(Stocks stock)
